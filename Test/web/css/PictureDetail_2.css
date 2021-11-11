@@ -1,0 +1,257 @@
+/* 版心 starts */
+
+.mainContent {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    margin: 0 auto;
+}
+
+
+/* ends */
+
+
+/* picBox starts */
+
+.picBox {
+    position: relative;
+    top: 0rem;
+    left: 0rem;
+    width: 91rem;
+    height: 42rem;
+    background-color: #a58faa;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.picBox img {
+    width: inherit;
+    height: 51.1875rem;
+    background-size: cover;
+}
+
+
+/* ends */
+
+
+/* 装饰盒子 statrs */
+
+
+/* 透明盒子 statrs */
+
+.transBox_1 {
+    position: absolute;
+    top: 655px;
+    left: 1rem;
+    width: 70rem;
+    height: 11rem;
+    background-color: rgba(49, 47, 47, 0.685);
+    opacity: 0;
+}
+
+
+.squareBox {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 30%;
+    opacity: 0;
+    background-color: #ffeedb3d;
+    animation: fadingIn 2s ease-in;
+    opacity: 1;
+}
+
+
+/* squareBox 渐变效果 */
+
+@keyframes fadingIn {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.2;
+    }
+    20% {
+        opacity: 0.3;
+    }
+    40% {
+        opacity: 0.4;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+
+/* ends */
+
+/* ends */
+
+/* 文字介绍 starts */
+.picBox .title {
+    position: absolute;
+    top: 6rem;
+    left: 3rem;
+    font-size: 10rem;
+    color: #f3f0d7e7;
+    font-family:'winmantun25006288f9ed2f5233c6';
+    opacity: 0;
+    animation: fadingIn 2s ease-in;
+    opacity: 1;
+}
+
+.picBox .poem1 {
+    position: absolute;
+    top: 36rem;
+    left: 6rem;
+    font-size: 4rem;
+    color: #f3f0d7e7;
+    font-family:'winmantun25006288fa3e7cd233c6';
+    opacity: 0;
+    animation: fadingIn 5s ease-in;
+    opacity: 1;
+}
+
+/* ends */
+
+
+/* 其他图片 statrs */
+
+/* content starts */
+.content {
+    position: relative;
+    background-color: rgba(81, 211, 243, 0.198);
+    width: 1200px;
+    height: 111rem;
+    margin: 0 auto;
+    margin-top: 7rem;
+    border-radius: 3rem;
+}
+.content img {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+
+/* topBar starts */
+.topBar img:nth-of-type(1) {
+    position: absolute;
+    top: 3rem;
+    left: 7rem;
+    width: 20rem;
+    height: 0.4rem;   
+}
+.topBar img:nth-of-type(2) {
+    position: absolute;
+    top: 3rem;
+    left: 51rem;
+    width: 21rem;
+    height: 0.4rem;   
+}
+.topBar p {
+    position: absolute;
+    top: 1.5rem;
+    left: 30rem;
+    font-size: 3rem;
+}
+.topBar p {
+    font-family:'jdzhonyuanjian286b7a01b4233c6';
+}
+/* ends */
+
+/* picture display starts */
+.pic_one {
+    position: absolute;
+    top: 7rem;
+    left: 2rem;
+    width: 50rem;
+    height: 28.125rem;
+    border-radius: 3rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem #33444369;
+}
+.pic_two {
+    position: absolute;
+    top: 40rem;
+    left: 21rem;
+    width: 50rem;
+    height: 28.125rem;
+    border-radius: 3rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem #33444369;
+}
+.pic_three {
+    position: absolute;
+    top: 73rem;
+    left: 2rem;
+    width: 50rem;
+    height: 28.125rem;
+    border-radius: 3rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem #33444369;
+}
+/* ends */
+
+/* discribe starts */
+.content .discribe {
+    position: absolute;
+    font-family:'COCOGOOSE';
+    color: #907fa4;
+}
+.content .discribe:nth-of-type(1) {
+    top: 9rem;
+    left: 55rem;
+    width: 19rem;
+    height: 28.125rem;
+}
+.content .discribe:nth-of-type(2) {
+    top: 41rem;
+    left: 3rem;
+    width: 16rem;
+    height: 28.125rem;
+}
+.content .discribe:nth-of-type(3) {
+    top: 74rem;
+    left: 55rem;
+    width: 18rem;
+    height: 28.125rem;
+}
+/* ends */
+
+/* bottomBar starts */
+.bottomBar img:nth-of-type(1) {
+    position: absolute;
+    top: 105rem;
+    left: 7rem;
+    width: 20rem;
+    height: 0.4rem;   
+}
+.bottomBar img:nth-of-type(2) {
+    position: absolute;
+    top: 105rem;
+    left: 51rem;
+    width: 21rem;
+    height: 0.4rem;   
+}
+.bottomBar p {
+    position: absolute;
+    top: 103.5rem;
+    left: 34rem;
+    font-size: 3rem;
+}
+.bottomBar p {
+    font-family:'jdzhonyuanjian286b7a01b4233c6';
+}
+/* ends */
+
+/* content ends */
+
+/* ends */
+
+/* ends */
