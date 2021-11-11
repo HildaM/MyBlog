@@ -27,4 +27,26 @@ document.addEventListener('mousemove', function(e) {
     pointer.style.top = y + 'px';
 })
 
+// 登录请求 starts
+
+
+//ajax提交信息
+$("#from2").submit(function(){
+    parent.layer.close(index); //再执行关闭
+    $.ajax({
+        async: false,
+        type: "POST",
+        url:'${pageContext.request.contextPath}/login',
+        contentType : "application/x-www-form-urlencoded; charset=utf-8",
+        data:$("#from2").serialize(),
+        dataType: "text",
+        success: function () {
+        },
+        error: function () {
+        }
+    })
+})
+
+// 登录请求 ends
+
 

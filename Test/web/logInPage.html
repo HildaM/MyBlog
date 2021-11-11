@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="css/logInPage.css">
     <link rel="stylesheet" href="component/button-active-animation.css">
 
-    <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" >
+
+    <link rel="shortcut icon" href="#"/>
 
     <title>LogInPage</title>
 </head>
@@ -25,23 +27,22 @@
         <div class="container_from container--signup">
             <form action="#" class="from" id="from1">
                 <h2 class="from_title">注册账号</h2>
-                <input type="text" class="input" placeholder="User">
-                <input type="email" class="input" placeholder="Email">
-                <input type="password" class="input" placeholder="Password">
+                <input name="userName" type="text" class="input" placeholder="User">
+                <input name="email" type="email" class="input" placeholder="Email">
+                <input name="password" type="password" class="input" placeholder="Password">
                 <button class="btn">点击注册</button>
             </form>
         </div>
 
         <!-- 登录框 -->
         <div class="container_from container--signin">
-            <form action="#" class="from" id="from2">
+            <form action="/login" class="from" id="from2" method="post">
                 <h2 class="from_title">欢迎登录</h2>
-                <input type="text" class="input" placeholder="User">
-                <input type="email" class="input" placeholder="Email">
-                <input type="password" class="input" placeholder="Password">
+                <input name="userName" type="text" class="input" placeholder="User">
+                <input name="password" type="password" class="input" placeholder="Password">
                 <a href="#" class="link">忘记密码？</a>
                 <button class="btn">
-                    <a href="index.html">登录</a>
+                    <input  name="submit" type="submit" class="btn" value="登录">
                 </button>
             </form>
         </div>

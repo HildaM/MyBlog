@@ -89,7 +89,7 @@ function ATEST(){
     /* post 方法封装了 ajax 方法*/
     $.post({
       /* 请求的路径 */
-      url:"http://localhost:8080/ajax",
+      url:"/ajax",
       /* 携带的数据 */
       /* 这里将 username 的值命名为 name 发送，后端接收的是 name */
       data:{'name':$("#username").val()},

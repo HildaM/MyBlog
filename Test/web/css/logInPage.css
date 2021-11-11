@@ -209,6 +209,13 @@ body {
     width: 100%;
 }
 
+.loginBtn {
+    margin: 0;
+    padding: 0;
+    border: none;  //去除边框
+    outline: none;    //消除默认点击蓝色边框效果
+}
+
 @keyframes show {
     0%,
     49.99%{
