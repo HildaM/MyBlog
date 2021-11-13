@@ -10,4 +10,14 @@
         select * from hilda_blog.blog_users where userName = #{userName} and password = #{password};
     </select>
 
+    <!-- 根据用户名查找用户  -->
+    <select id="selectUserByName" resultType="User">
+        select * from hilda_blog.blog_users where userName = #{userName};
+    </select>
+
+    <!-- 根据密码查找用户  -->
+    <select id="selectUserByPassword" resultType="User">
+        select * from hilda_blog.blog_users where password = #{password};
+    </select>
+
 </mapper>

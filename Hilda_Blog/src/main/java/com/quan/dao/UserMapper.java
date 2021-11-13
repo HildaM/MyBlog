@@ -12,4 +12,10 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
     // 登录验证
     public User loginCheck(@Param("userName") String userName, @Param("password") String password);
+
+    // 根据用户名查找
+    public User selectUserByName(@Param("userName") String userName);
+
+    // 根据密码查找
+    public User selectUserByPassword(@Param("password") String password);
 }

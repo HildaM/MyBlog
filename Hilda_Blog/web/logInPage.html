@@ -38,8 +38,10 @@
         <div class="container_from container--signin">
             <form action="/login" class="from" id="from2" method="post">
                 <h2 class="from_title">欢迎登录</h2>
-                <input name="userName" type="text" class="input" placeholder="User">
-                <input name="password" type="password" class="input" placeholder="Password">
+                <input id="userName" name="userName" type="text" class="input" placeholder="User" required onblur="selectUserByName()">
+                    <span id="userNameInfo" class="jsSpan"></span>
+                <input id="password" name="password" type="password" class="input" placeholder="Password" required onblur="selectUserByPassword()">
+                    <span id="pwdInfo" class="jsSpan"></span>
                 <a href="#" class="link">忘记密码？</a>
                 <button class="btn">
                     <input  name="submit" type="submit" class="btn" value="登录">
