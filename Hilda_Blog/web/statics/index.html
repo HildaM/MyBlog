@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入外部字体 -->
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144726/29782/609d1e97f629d8f43462a231.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="component/bttn.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="component/button-active-animation.css">
+    <script src="js/index.js" defer=true></script>
+
+    <!-- 引入jQuery -->
+    <script src="js/jquery-3.6.0.min.js" defer=true></script>
+
+    <title>Hilda's Blog</title>
+</head>
+<body>
+    <!-- nav starts  -->
+   <div class="nav">
+        <div class="quan">
+            <img src="images/quan.png" alt="" class="quan_icon">
+            <img src="images/By.png" alt="" class="By">
+            <img src="images/Hilda.png" alt="" class="Hilda">
+        </div>
+        <ul class="nav_menu">  
+            <li class=""><button class="bttn-stretch bttn-md bttn-success"><a href="index.html">Home</a></button></li>  
+            <li class=""><button class="bttn-stretch bttn-md bttn-success"><a href="Gallery.html">Gallery</a></button></li>
+            <li class="database_li">
+                <button class="bttn-stretch bttn-md bttn-success">
+                    <a href="KnowledgeBase.html">KnowledgeBase</a>
+                </button>
+            </li>
+            <li class=""><button class="bttn-stretch bttn-md bttn-success">About</button></li>
+        </ul>
+    </div>
+    <!-- nav ends -->
+    
+    <!-- 背景黑框 -->
+    <div class="blackCover"></div>
+
+    <!-- 衬托盒子 -->
+    <div class="whiteBox"></div>
+
+    <!-- 文字提示 -->
+    <div class="title">
+        <img src="images/Personal%20Blog.png" alt="">
+    </div>
+
+    <!-- 登录按钮 -->
+    <button class="bttn-pill bttn-lg bttn-success logInBtn">
+        <a href="logInPage.html">Log in</a>
+        <input type="text" id="username" onblur="ATEST()"/>
+    </button>
+    
+</body>
+</html>

@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>Test</module>
+        <module>Hilda_Blog</module>
     </modules>
 
     <properties>

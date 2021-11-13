@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入全局样式 -->
+    <link rel="stylesheet" href="css/global.css">
+    <!-- 引入外部字体 -->
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/46758/607bd0a3f629d83c245f62d5.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/28621/607be546f629d83c245f62da.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/45817/607bdce7f629d83c245f62d8.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/47031/607bd075f629d83c245f62d4.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/31452/607e94abf629d8194077a7c3.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.repository.webfont.com/webfonts/nomal/144326/47637/607e9868f629d8194077a7c5.css' rel='stylesheet' type='text/css' />
+    <!-- 引入外部按钮样式 -->
+    <link rel="stylesheet" href="component/bttn.min.css">
+    <link rel="stylesheet" href="component/button-active-animation.css">
+    <!-- 引入当前页面样式 -->
+    <link rel="stylesheet" href="css/DailyNotes.css">
+    <!-- 引入滑动动画 js-->
+    <script src="js/Move_Down.js"></script>
+    <!-- 引入当前页面js -->
+    <script src="js/DailyNotes.js"></script>
+    <!-- 调用外部背景包 -->
+    <script src="component/three.min.js"></script>
+    <title>Daily notes</title>
+</head>
+<body>
+    <!-- 外部背景样式 -->
+    <script>    
+    
+        var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
+    
+        var container;
+        var camera, scene, renderer;
+    
+        var particles, particle, count = 0;
+    
+        var mouseX = 0, mouseY = -350;
+    
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
+    
+        init();
+        animate();
+    
+        function init() {
+    
+            container = document.createElement( 'div' );
+            document.body.appendChild( container );
+    
+            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.z = 1000;
+    
+            scene = new THREE.Scene();
+    
+            particles = new Array();
+    
+            var PI2 = Math.PI * 2;
+            var material = new THREE.ParticleCanvasMaterial( {
+    
+                color: 0xc4c4c4,
+                program: function ( context ) {
+    
+                    context.beginPath();
+                    context.arc( 0, 0, 1, 0, PI2, true );
+                    context.fill();
+    
+                }
+    
+            } );
+    
+            var i = 0;
+    
+            for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+    
+                for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+    
+                    particle = particles[ i ++ ] = new THREE.Particle( material );
+                    particle.position.x = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 );
+                    particle.position.z = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 );
+                    scene.add( particle );
+    
+                }
+    
+            }
+    
+            renderer = new THREE.CanvasRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            container.appendChild( renderer.domElement );
+    
+            document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+            document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+            document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+    
+            //
+    
+            window.addEventListener( 'resize', onWindowResize, false );
+    
+        }
+    
+        function onWindowResize() {
+    
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+    
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+    
+            renderer.setSize( window.innerWidth, window.innerHeight );
+    
+        }
+    
+        //
+    
+        function onDocumentMouseMove( event ) {
+    
+            mouseX = event.clientX - windowHalfX;
+            mouseY = event.clientY - windowHalfY;
+    
+        }
+    
+        function onDocumentTouchStart( event ) {
+    
+            if ( event.touches.length === 1 ) {
+    
+                event.preventDefault();
+    
+                mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                mouseY = event.touches[ 0 ].pageY - windowHalfY;
+    
+            }
+    
+        }
+    
+        function onDocumentTouchMove( event ) {
+    
+            if ( event.touches.length === 1 ) {
+    
+                event.preventDefault();
+    
+                mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                mouseY = event.touches[ 0 ].pageY - windowHalfY;
+    
+            }
+    
+        }
+    
+        //
+    
+        function animate() {
+    
+            requestAnimationFrame( animate );
+    
+            render();
+    
+    
+        }
+    
+        function render() {
+    
+            camera.position.x += ( mouseX - camera.position.x ) * .05;
+            camera.position.y += ( - mouseY - camera.position.y ) * .05;
+            camera.lookAt( scene.position );
+    
+            var i = 0;
+    
+            for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+    
+                for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+    
+                    particle = particles[ i++ ];
+                    particle.position.y = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) + ( Math.sin( ( iy + count ) * 0.5 ) * 50 );
+                    particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 2 + ( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 2;
+    
+                }
+    
+            }
+    
+            renderer.render( scene, camera );
+    
+            count += 0.1;
+    
+        }
+    
+    </script>
+
+    <!-- nav starts  -->
+    <div class="nav">
+        <div class="quan">
+            <img src="images/quan.png" alt="" class="quan_icon">
+            <img src="images/By.png" alt="" class="By">
+            <img src="images/Hilda.png" alt="" class="Hilda">
+        </div>
+        <div class="sign_in">
+            <button class="bttn-unite bttn-md bttn-success sign_button">
+                <a href="logInPage.html">Sign in</a>
+            </button>
+        </div>
+        <ul class="nav_menu"> 
+            <li class=""><button class="bttn-stretch bttn-md bttn-success"><a href="index.html">Home</a></button></li>     
+            <li class=""><button class="bttn-stretch bttn-md bttn-success"><a href="Gallery.html">Gallery</a></button></li>
+            <li class=""><button class="bttn-stretch bttn-md bttn-success"><a href="DailyNotes.html">DailyNotes</a></button></li>
+            <li class="database_li">
+                <button class="bttn-stretch bttn-md bttn-success">
+                    <a href="KnowledgeBase.html">KnowledgeBase</a>
+                </button>
+            </li>
+            <li class=""><button class="bttn-stretch bttn-md bttn-success">About</button></li>
+        </ul>
+    </div>
+    <!-- nav ends -->
+
+    <!-- 空白盒子 调整布局 -->
+    <div class="white_box"></div>
+    <!-- ends -->
+    
+    <!-- 核心滚动区域 starts -->
+    <div class="roll_contents">
+        <!-- 重大调整！！！：此处交换了rightBar和leftBar的位置，
+            但是不打算再修改 JS 和 CSS 的相关名称了，所以自己在这里要小心！ -->
+        <!-- 右侧内容栏 starts -->
+        <div class="rightBar">
+            <ul class="rightContents">
+                <li>
+                    <div class="contents_1">
+                        <div class="leftImg">
+                            <div class="pytorch-logo">
+                                <img src="images/pytorch-logo.png" alt="">
+                            </div>
+                            <img src="images/Pytorch.png" alt="" class="pytorch">
+                            <img src="images/line.png" alt="" class="line_1">
+                            <img src="images/Learning.png" alt="" class="learning">
+                            <img src="images/line.png" alt="" class="line_2">
+                            <img src="images/2%20.png" alt="" class="two">
+                            <img src="images/3%20.png" alt="" class="three">
+                            <img src="images/line1.png" alt="" class="line1">
+                            <div class="text">
+                                <p>
+                                    Today's greatest accomplishment
+                                </p>
+                            </div>
+                            <div class="title">
+                                <h3>
+                                    AI&nbsp;&nbsp;learning
+                                </h3>
+                            </div>
+                            <div class="text-1">
+                                <p>
+                                    End-to-end Machine Learning Framework<br>
+                                    PyTorch enables fast, flexible experimentation and efficient production through a user-friendly front-end, distributed training, and ecosystem of tools and libraries. 
+                                    <br>With TorchScript, PyTorch provides ease-of-use and flexibility in eager mode, while seamlessly transitioning to graph mode for speed, optimization, and functionality in C++ runtime environments.
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contents_2">
+                        <h1>Reading English Article</h1>
+                        <div class="date">
+                            <p>04.23</p>
+                        </div>
+                        <div class="article">
+                            <p>
+                                There are moments in life when you miss someone so much that you just want to pick them from your dreams and hug them for real!
+                                Dream what you want to dream;go where you want to go;
+                                be what you want to be,because you have only one life and one chance to do all the things you want to do.
+　　                            May you have enough happiness to make you sweet,enough trials to make you strong,
+                                enough sorrow to keep you human,enough hope to make you happy?<br>
+                                Always put yourself in others’shoes.If you feel that it hurts you,it probably hurts the other person, too.
+                                The happiest of people don’t necessarily have the best of everything;they just make the most of everything that comes along their way.<br>
+                                Happiness lies for those who cry,those who hurt, those who have searched,and those who have tried,for only they can appreciate the importance of people
+                                who have touched their lives.Love begins with a smile,grows with a kiss and ends with a tear.The brightest future will always be based on a forgotten past, you can’t go on well in lifeuntil you let go of your past failures and heartaches.
+                                When you were born,you were crying and everyone around you was smiling.Live your life so that when you die,you're the one who is smiling and everyone around you is crying.<br>
+                                Please send this message to those people who mean something to you,to those who have touched your life in one way or another,to those who make you smile when you really need it,to those that make you see the brighter side of things when you are really down,
+                                to those who you want to let them know that you appreciate their friendship.<br>
+                                And if you don’t, don’t worry,nothing bad will happen to you,you will just miss out on the opportunity to brighten someone’s day with this message.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contents_3">
+                        <div class="whiteBox"></div>
+                        <h1 class="h1_1">Stay Foolish</h1>
+                        <h1 class="h1_2">Stay Hungry</h1>
+                        <p>
+                            Your time is limited, so don’t waste it living someone else’s life. Don’t be trapped by dogma - which is living with the results of other people’s thinking. 
+                            Don’t let the noise of other’s opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become.
+                            Everything else is secondary.<br>
+                            When I was young, there was an amazing publication called The Whole Earth Catalog, which was one of the bibles of my generation. It was created by a fellow named Stewart Brand not far from here in Menlo Park, 
+                            and he brought it to life with his poetic touch. This was in the late 1960’s, before personal computers and desktop publishing, so it was all made with typewriters, scissors, and polaroid cameras. It was sort of like Google in paperback form, 
+                            35 years before Google came along: it was idealistic, and overflowing with neat tools and great notions.<br>
+                            Stewart and his team put out several issues of The Whole Earth Catalog, and then when it had run its course, they put out a final issue. It was the mid-1970s, and I was your age. 
+                            On the back cover of their final issue was a photograph of an early morning country road, the kind you might find yourself hitchhiking on if you were so adventurous. Beneath it were the words: “Stay Hungry. Stay Foolish.” 
+                            It was their farewell message as they signed off. Stay Hungry. Stay Foolish. And I have always wished that for myself. And now, as you graduate to begin anew, I wish that for you.
+                            <br>    
+                        </p>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- 右侧内容栏 ends -->
+
+        <!-- 左侧目录栏 starts -->
+        <div class="leftBar">
+            <ol class="leftContents">
+                
+            </ol>    
+        </div>
+        <!-- 左侧目录栏 ends -->
+    </div>
+    <!-- 核心滚动区域 ends  -->
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* 鼠标经过图片时的特效 starts */
+@keyframes moving {
+    from {
+        border: 0px;
+        box-shadow: 0.5rem 0.5rem 0.5rem #33444369;
+    }
+    to {
+        border: 1px solid #907fa4;
+        box-shadow: 1.5rem 1.5rem 1rem #33444369;
+    }
+}
+/* ends */
+
+/* 绑定盒子 starts */
+.pic_one:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+.pic_two:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+.pic_three:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+
+.picture_one:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+.picture_two:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+.picture_three:hover {
+    animation-name: moving;
+    animation-duration: 1s;
+    box-shadow: 1.5rem 1.5rem 1rem #33444369;
+}
+
+
+/* ends */
