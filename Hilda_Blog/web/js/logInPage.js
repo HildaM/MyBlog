@@ -27,35 +27,15 @@ document.addEventListener('mousemove', function(e) {
     // pointer.style.top = y + 'px';
 })
 
-// 登录请求 starts
-
-
-//ajax 提交登录信息
-$("#from2").submit(function(){
-    $.ajax({
-        async: false,
-        method: "POST",
-        url:'/login',
-        contentType : "application/x-www-form-urlencoded; charset=utf-8",
-        data:$("#from2").serialize(),
-        dataType: "text",
-        success: function () {
-
-        },
-        error: function () {
-            alert("登录失败！");
-        }
-    })
-})
 
 // 通过用户名异步查找
 selectUserByName = function () {
     $.post({
-        url: "/selectUserByNameOrPassword",
+        url: "/selectUser",
         data: {'userName': $("#userName").val()},
         // 向后端发送数据成功后。data：后端返回的数据
         success: function (data) {
-            if (data.toString() === '正确√') {
+            if (data.toString() === 'userName exist') {
                 $("#userNameInfo").css("color", "green");
             }
             else {
@@ -69,10 +49,10 @@ selectUserByName = function () {
 // 通过密码异步查找
 selectUserByPassword = function () {
     $.post({
-        url: "/selectUserByNameOrPassword",
+        url: "/selectUser",
         data: {'password': $("#password").val()},
         success: function (data) {
-            if (data.toString() === '正确√') {
+            if (data.toString() === 'password exist') {
                 $("#pwdInfo").css("color", "green");
             }
             else {
@@ -83,6 +63,84 @@ selectUserByPassword = function () {
     });
 }
 
+
+// 登录请求 starts
+$("#from2").submit(function(){
+    $.ajax({
+        async: false,
+        method: "POST",
+        url:'/login',
+        contentType : "application/x-www-form-urlencoded; charset=utf-8",
+        data:$("#from2").serialize(),
+        dataType: "text",
+        success: function (data) {
+            if (data.toString() === "success") {
+                alert("登录成功！");
+            }
+            else if (data.toString() === "failure") {
+                alert("登录失败！");
+            }
+        }
+    })
+})
 // 登录请求 ends
+
+
+// 检查用户名是否存在
+checkUserName = function () {
+    $.post({
+        url: "/selectUser",
+        data: {'userName': $("#addUserName").val()},
+        success: function (data) {
+            if (data.toString() === 'userName exist') {
+                $("#checkUserName").css("color", "red");
+            }
+            else {
+                $("#checkUserName").css("color", "green");
+            }
+            $("#checkUserName").html(data);
+        }
+    });
+}
+
+
+// 检查邮箱是否存在
+checkEmail = function () {
+    $.post({
+        url: "/selectUser",
+        data: {"email": $("#addEmail").val()},
+        success: function (data) {
+            if (data.toString() === 'email exist') {
+                $("#checkEmail").css("color", "red");
+            }
+            else {
+                $("#checkEmail").css("color", "green");
+            }
+            $("#checkEmail").html(data);
+        }
+    });
+}
+
+
+// 注册用户 starts
+$("#from1").submit(function (){
+    $.post({
+        url: "/addUser",
+        method: "POST",
+        async: false,
+        contentType : "application/x-www-form-urlencoded; charset=utf-8",
+        data: $("#from1").serialize(),
+        dataType: "text",
+        success: function (data) {
+            if (data.toString() === "success") {
+                alert("注册成功！");
+            }
+            else if (data.toString() === "failure") {
+                alert("注册失败！");
+            }
+        }
+    });
+})
+// 注册用户 ends
 
 

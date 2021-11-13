@@ -18,4 +18,13 @@ public interface UserMapper {
 
     // 根据密码查找
     public User selectUserByPassword(@Param("password") String password);
+
+    // 根据邮箱查找
+    public User selectUserByEmail(@Param("email") String email);
+
+    // 统计用户数量
+    public int countUsers();
+
+    // 添加用户
+    public int updateUser(User user);
 }

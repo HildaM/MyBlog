@@ -1,6 +1,7 @@
 package com.quan.service;
 
 import com.quan.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName: UserService
@@ -17,4 +18,13 @@ public interface UserService {
 
     // 根据密码查找
     public User selectUserByPassword(String password);
+
+    // 根据邮箱查找
+    public User selectUserByEmail(String email);
+
+    // 统计用户数量
+    public int countUsers();
+
+    // 添加用户
+    public int updateUser(User user);
 }

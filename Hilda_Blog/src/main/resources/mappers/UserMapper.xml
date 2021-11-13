@@ -5,6 +5,25 @@
 
 <mapper namespace="com.quan.dao.UserMapper">
 
+    <sql id="queryUser">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userCode != null">
+                and userCode = #{userCode}
+            </if>
+            <if test="userName">
+                and userName = #{userName}
+            </if>
+            <if test="userPassword">
+                and userPassword = #{userPassword}
+            </if>
+        </where>
+    </sql>
+
+
+
     <!-- 登录验证  -->
     <select id="loginCheck" resultType="User">
         select * from hilda_blog.blog_users where userName = #{userName} and password = #{password};
@@ -19,5 +38,22 @@
     <select id="selectUserByPassword" resultType="User">
         select * from hilda_blog.blog_users where password = #{password};
     </select>
+
+    <!-- 根据邮箱查找 -->
+    <select id="selectUserByEmail" resultType="User">
+        select * from hilda_blog.blog_users where email = #{email};
+    </select>
+
+    <!-- 统计用户数量 -->
+    <select id="countUsers" resultType="Integer">
+        select count(*) from hilda_blog.blog_users
+    </select>
+
+
+    <!-- 添加用户  -->
+    <update id="updateUser" parameterType="User">
+        insert into hilda_blog.blog_users (userName, password, email)
+        values (#{userName}, #{password}, #{email})
+    </update>
 
 </mapper>

@@ -55,4 +55,28 @@ public class UserServiceImpl implements UserService {
         }
         else return null;
     }
+
+    // 根据邮箱查找
+    @Override
+    public User selectUserByEmail(String email) {
+        if (email != null && email.length() > 0) {
+            return userMapper.selectUserByEmail(email);
+        }
+        else return null;
+    }
+
+    // 统计用户数量
+    @Override
+    public int countUsers() {
+        return userMapper.countUsers();
+    }
+
+    // 添加用户
+    @Override
+    public int updateUser(User user) {
+        if (user != null) {
+            return userMapper.updateUser(user);
+        }
+        return 0;
+    }
 }

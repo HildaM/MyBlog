@@ -25,11 +25,13 @@
     <div class="container right-panel-active">
         <!-- 注册框 -->
         <div class="container_from container--signup">
-            <form action="#" class="from" id="from1">
+            <form action="/addUser" class="from" id="from1">
                 <h2 class="from_title">注册账号</h2>
-                <input name="userName" type="text" class="input" placeholder="User">
-                <input name="email" type="email" class="input" placeholder="Email">
-                <input name="password" type="password" class="input" placeholder="Password">
+                <input id="addUserName" name="userName" type="text" class="input" placeholder="User" required onblur="checkUserName()">
+                    <span id="checkUserName" class="jsSpan"></span>
+                <input id="addEmail" name="email" type="email" class="input" placeholder="Email" required onblur="checkEmail()">
+                    <span id="checkEmail" class="jsSpan"></span>
+                <input id="addPassword" name="password" type="password" class="input" placeholder="Password">
                 <button class="btn">点击注册</button>
             </form>
         </div>
@@ -39,7 +41,7 @@
             <form action="/login" class="from" id="from2" method="post">
                 <h2 class="from_title">欢迎登录</h2>
                 <input id="userName" name="userName" type="text" class="input" placeholder="User" required onblur="selectUserByName()">
-                    <span id="userNameInfo" class="jsSpan"></span>
+
                 <input id="password" name="password" type="password" class="input" placeholder="Password" required onblur="selectUserByPassword()">
                     <span id="pwdInfo" class="jsSpan"></span>
                 <a href="#" class="link">忘记密码？</a>

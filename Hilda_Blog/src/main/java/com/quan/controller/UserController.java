@@ -27,38 +27,70 @@ public class UserController {
     // 用户登录
     @PostMapping("/login")
     // HttpServletRequest req, HttpServletResponse resp
-    public void login(String userName, String password, HttpServletResponse resp) throws Exception {
+    public String login(String userName, String password, HttpServletResponse resp) throws Exception {
         // 验证密码
         User user = userService.loginCheck(userName, password);
 
         // 判断
         if (user != null) {
             resp.sendRedirect("/index.html");
+            return "success";
         }
         else {
             resp.sendRedirect("/logInPage.html");
+            return "failure";
         }
     }
 
 
-    // 根据用户名或密码查找用户
-    @PostMapping("/selectUserByNameOrPassword")
-    public String selectUserByNameOrPassword(String userName, String password) {
+    // 根据用户名或密码或email查找用户
+    @PostMapping("/selectUser")
+    public String selectUserByNameOrPassword(String userName, String password, String email) {
         String msg = "";
 
         if (userName != null && userName.length() > 0) {
             User user = userService.selectUserByName(userName);
-            if (user != null) msg = "正确√";
-            else msg = "此用户不存在，请注册！";
+            if (user != null) msg = "userName exist";
+            else msg = "userName isn't exist";
             return msg;
         }
 
         if (password != null && password.length() > 0) {
             User user = userService.selectUserByPassword(password);
-            if (user != null) msg = "正确√";
-            else msg = "密码错误！";
+            if (user != null) msg = "password exist";
+            else msg = "password isn't exist";
             return msg;
         }
+
+        if (email != null && email.length() > 0) {
+            User user = userService.selectUserByEmail(email);
+            if (user != null) msg = "email exist";
+            else msg = "email isn't exist";
+            return msg;
+        }
+
+        return msg;
+    }
+
+
+    // 添加用户
+    @PostMapping("/addUser")
+    public String addUser(User user, HttpServletResponse resp) throws Exception {
+        String msg = "failure";
+
+        // 先统计用户的数量
+//        Integer userCounts = userService.countUsers();
+//        if (userCounts > 0) {
+//            user.setUserID(userCounts + 1);
+//        }
+
+        if (user != null) {
+            if (userService.updateUser(user) > 0) msg = "success";
+        }
+
+        // 立即刷新当前网页
+        resp.setHeader("refresh", "3");
+        // resp.sendRedirect("/logInPage.html");
 
         return msg;
     }
