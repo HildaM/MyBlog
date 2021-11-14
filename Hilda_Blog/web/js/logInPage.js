@@ -31,7 +31,7 @@ document.addEventListener('mousemove', function(e) {
 // 通过用户名异步查找
 selectUserByName = function () {
     $.post({
-        url: "/selectUser",
+        url: "/selectUser.do",
         data: {'userName': $("#userName").val()},
         // 向后端发送数据成功后。data：后端返回的数据
         success: function (data) {
@@ -49,7 +49,7 @@ selectUserByName = function () {
 // 通过密码异步查找
 selectUserByPassword = function () {
     $.post({
-        url: "/selectUser",
+        url: "/selectUser.do",
         data: {'password': $("#password").val()},
         success: function (data) {
             if (data.toString() === 'password exist') {
@@ -69,15 +69,17 @@ $("#from2").submit(function(){
     $.ajax({
         async: false,
         method: "POST",
-        url:'/login',
+        url:'/login.do',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         data:$("#from2").serialize(),
         dataType: "text",
         success: function (data) {
             if (data.toString() === "success") {
+                window.location.href = "/index.html";
                 alert("登录成功！");
             }
             else if (data.toString() === "failure") {
+                window.location.href = "/logInPage.html";
                 alert("登录失败！");
             }
         }
@@ -89,7 +91,7 @@ $("#from2").submit(function(){
 // 检查用户名是否存在
 checkUserName = function () {
     $.post({
-        url: "/selectUser",
+        url: "/selectUser.do",
         data: {'userName': $("#addUserName").val()},
         success: function (data) {
             if (data.toString() === 'userName exist') {
@@ -107,7 +109,7 @@ checkUserName = function () {
 // 检查邮箱是否存在
 checkEmail = function () {
     $.post({
-        url: "/selectUser",
+        url: "/selectUser.do",
         data: {"email": $("#addEmail").val()},
         success: function (data) {
             if (data.toString() === 'email exist') {
@@ -125,7 +127,7 @@ checkEmail = function () {
 // 注册用户 starts
 $("#from1").submit(function (){
     $.post({
-        url: "/addUser",
+        url: "/addUser.do",
         method: "POST",
         async: false,
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -138,6 +140,7 @@ $("#from1").submit(function (){
             else if (data.toString() === "failure") {
                 alert("注册失败！");
             }
+            window.location.reload();
         }
     });
 })

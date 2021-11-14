@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * @ClassName: UserController
@@ -25,26 +26,26 @@ public class UserController {
 
 
     // 用户登录
-    @PostMapping("/login")
+    @PostMapping("/login.do")
     // HttpServletRequest req, HttpServletResponse resp
-    public String login(String userName, String password, HttpServletResponse resp) throws Exception {
+    public String login(String userName, String password, HttpSession session) throws Exception {
         // 验证密码
         User user = userService.loginCheck(userName, password);
 
         // 判断
         if (user != null) {
-            resp.sendRedirect("/index.html");
+            // 登录成功后，向session写入用户信息
+            session.setAttribute("user", userName);
             return "success";
         }
         else {
-            resp.sendRedirect("/logInPage.html");
             return "failure";
         }
     }
 
 
     // 根据用户名或密码或email查找用户
-    @PostMapping("/selectUser")
+    @PostMapping("/selectUser.do")
     public String selectUserByNameOrPassword(String userName, String password, String email) {
         String msg = "";
 
@@ -74,8 +75,8 @@ public class UserController {
 
 
     // 添加用户
-    @PostMapping("/addUser")
-    public String addUser(User user, HttpServletResponse resp) throws Exception {
+    @PostMapping("/addUser.do")
+    public String addUser(User user) {
         String msg = "failure";
 
         // 先统计用户的数量
@@ -88,8 +89,8 @@ public class UserController {
             if (userService.updateUser(user) > 0) msg = "success";
         }
 
-        // 立即刷新当前网页
-        resp.setHeader("refresh", "3");
+        // 立即刷新当前网页，可以使用js实现！！！
+//        resp.setHeader("refresh", "3");
         // resp.sendRedirect("/logInPage.html");
 
         return msg;

@@ -77,4 +77,28 @@
         <property name="contentType" value="text/html;charset=UTF-8"/><!-- 解决网页中文乱码的问题 -->
     </bean>
 
+
+
+    <!--  SpringMVC 拦截器  -->
+    <mvc:interceptors>
+        <!-- 登录拦截 -->
+        <mvc:interceptor>
+
+            <!-- 拦截的路径 -->
+            <!-- /* 只包括下一级，如 /test/* 会拦截 /test/t1，但不会拦截 /test/t/t2 -->
+            <!-- /** 包括路径下所有！ -->
+            <mvc:mapping path="/**"/>
+
+            <!-- 排除所有静态资源 -->
+            <mvc:exclude-mapping path="/logInPage.html"/>
+            <mvc:exclude-mapping path="/component/**"/>
+            <mvc:exclude-mapping path="/css/**"/>
+            <mvc:exclude-mapping path="/images/**"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <!-- 使用哪个拦截器 -->
+            <bean class="com.quan.config.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>
