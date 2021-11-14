@@ -91,6 +91,7 @@
 
             <!-- 排除所有静态资源 -->
             <mvc:exclude-mapping path="/logInPage.html"/>
+            <mvc:exclude-mapping path="/**.do"/>
             <mvc:exclude-mapping path="/component/**"/>
             <mvc:exclude-mapping path="/css/**"/>
             <mvc:exclude-mapping path="/images/**"/>
